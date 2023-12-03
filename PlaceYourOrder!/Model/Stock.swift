@@ -7,30 +7,27 @@
 
 import Foundation
 
-enum SnackType: String, CaseIterable {
+enum ItemType: String, CaseIterable {
     case hamburger = "Hamburger"
     case hotdog = "Hot Dog"
     case sandwich = "Sandwich"
-}
-
-enum DrinkType: String, CaseIterable {
     case soda = "Soda"
     case juice = "Juice"
     case water = "Water"
 }
 
-// Objects
-
-struct Snack: Identifiable {
+// Object
+struct Item: Identifiable {
     let id: UUID = UUID()
-    let snack: SnackType
+    let type: ItemType
     var quantity: Int
 }
 
-struct Drink: Identifiable {
-    let id: UUID = UUID()
-    let drink: DrinkType
-    var quantity: Int
+protocol OrderBuilderProtocol {
+    func addItem(type: ItemType)
+    func removeItem(type: ItemType)
+    func getQuantity(type: ItemType) -> Int
+    func build() -> [Item]
 }
 
 

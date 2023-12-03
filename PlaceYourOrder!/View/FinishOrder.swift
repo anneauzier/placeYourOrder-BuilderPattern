@@ -12,17 +12,21 @@ struct FinishOrder: View {
     @ObservedObject var viewModel: OrderBuilder
     
     var body: some View {
-        VStack {
-            ForEach(viewModel.build().snack) { snack in
-                Text("\(snack.quantity) - \(snack.snack.rawValue) ")
+        VStack(alignment: .leading) {
+            ForEach(viewModel.build()) { item in
+                Text("\(item.quantity)x \(item.type.rawValue) ")
+                    .font(.title3)
+                    .foregroundStyle(.white)
+                    .frame(maxWidth: .infinity, alignment: .leading)
             }
-            ForEach(viewModel.build().drink) { drink in
-                Text("\(drink.quantity) - \(drink.drink.rawValue)")
-            }
-        }
+            Spacer()
+        }.padding([.vertical, .horizontal], 20)
+        .navigationTitle("Your Order:")
+        .background(Color.brown)
     }
 }
 
 #Preview {
     FinishOrder(viewModel: OrderBuilder())
 }
+
